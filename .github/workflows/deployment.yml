@@ -12,7 +12,7 @@ jobs:
           node-version: 18
       - name: Install dependencies
         run: npm ci # installing a clean install of devDependencies
-      - name: Run tests
+      - name: Run lint
         run: npm run lint
   test:
     needs: lint # This makes this job run in sequential after the job "lint" and not in parallel
