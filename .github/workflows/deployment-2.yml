@@ -1,0 +1,22 @@
+name: Deploy Project (with one job)
+on: push
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get code
+        uses: actions/checkout@v3
+      - name: Install NodeJS # Sometimes we don't need this step if the runner already has it installed
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Install dependencies
+        run: npm ci # installing a clean install of devDependencies
+      - name: Lint
+        run: npm run lint
+      - name: Test code
+        run: npm run test
+      - name: Build code
+        run: npm run build
+      - name: Deploy code
+        run: echo "Deploying..." # In this step we should deploy to a hosting server, here we are just simulating

@@ -1,4 +1,4 @@
-name: Deploy Project
+name: Deploy Project (with 3 jobs)
 on: push
 jobs:
   lint:
@@ -12,7 +12,7 @@ jobs:
           node-version: 18
       - name: Install dependencies
         run: npm ci # installing a clean install of devDependencies
-      - name: Run lint
+      - name: Lint
         run: npm run lint
   test:
     needs: lint # This makes this job run in sequential after the job "lint" and not in parallel
@@ -26,7 +26,7 @@ jobs:
           node-version: 18
       - name: Install dependencies
         run: npm ci # installing a clean install of devDependencies
-      - name: Run tests
+      - name: Test code
         run: npm run test
   deploy:
     needs: test # This makes this job run in sequential after the job "test" and not in parallel
@@ -40,7 +40,7 @@ jobs:
           node-version: 18
       - name: Install dependencies
         run: npm ci # installing a clean install of devDependencies
-      - name: Build project
+      - name: Build code
         run: npm run build
-      - name: Deploy
+      - name: Deploy code
         run: echo "Deploying..." # In this step we should deploy to a hosting server, here we are just simulating
